@@ -3,9 +3,22 @@ name: Automated Tests
 on: pull_request
 
 jobs:
-  jest:
+  jest-ubuntu:
     name: Jest Ubuntu
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "lts/hydrogen"
+
+      - run: npm ci
+
+      - run: npm test
+  jest-windows:
+    name: Jest Windows
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
 
