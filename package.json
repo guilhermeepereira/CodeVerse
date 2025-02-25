@@ -4,7 +4,7 @@
   "description": "Blog informativo para quem trabalha com tecnologia.",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run services:up && npm run wait-for-database && npm run migrations:up && next dev",
+    "dev": "npm run services:up && npm run services:wait:database && npm run migrations:up && next dev",
     "postdev": "npm run services:down",
     "test": "npm run services:up && concurrently -n next,jest --hide next -k --success command-jest \"next dev\" \"jest --runInBand --verbose\"",
     "posttest": "npm run services:down",
@@ -12,7 +12,7 @@
     "services:up": "docker compose -f infra/compose.yaml up -d",
     "services:stop": "docker compose -f infra/compose.yaml stop",
     "services:down": "docker compose -f infra/compose.yaml down",
-    "wait-for-database": "node infra/scripts/wait-for-postgres.js",
+    "services:wait:database": "node infra/scripts/wait-for-postgres.js",
     "migrations:create": "node-pg-migrate -m infra/migrations create",
     "migrations:up": "node-pg-migrate -m infra/migrations --envPath .env.development up",
     "lint:prettier:check": "prettier --check .",
