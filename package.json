@@ -4,7 +4,8 @@
   "description": "Blog informativo para quem trabalha com tecnologia.",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run services:up && npm run services:wait:database && npm run migrations:up && next dev",
+    "predev": "npm run services:up && npm run services:wait:database && npm run migrations:up",
+    "dev": "bash down-database.sh",
     "postdev": "npm run services:down",
     "test": "npm run services:up && concurrently -n next,jest --hide next -k --success command-jest \"next dev\" \"jest --runInBand --verbose\"",
     "posttest": "npm run services:down",
